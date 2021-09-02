@@ -111,5 +111,30 @@ umount -a
 # Time To Reboot
 reboot
 
+# After Reboot
+# Login With User And Password (Lines 94 to 96 In This Doc)
+
+# Only For WiFi Users:
+nmtui
+# Activate A Connection > Select Your Wifi > Set Password & Connect
+
+# Test Your Connection
+sudo pacman -Syy 
+
+# Copy Our Private Repository From Root Folder To Home Folder So We Can Use It
+cp -r /arch-install .   # Use "ls -l" and check for 'arch-install' is listed
+cd arch-install         # To Move To The Folder Location
+ls -l                   # To List The Files Inside The Folder
+# To Edit Any Script Use: nano "name of the script" Example = nano install-uefi.sh
+
+
+
+
+
+
+
+
+
+
 
 
