@@ -1,0 +1,28 @@
+# NOTE: Press CTRL + L to clear the terminal at any point.
+
+# Setting The Keyboard Layout (Default = English US)
+# Listing Keyboard Layouts With:
+ls /usr/share/kbd/keymaps/**/*.map.gz
+# To Modify The Layout:
+loadkeys "keymap you want"    # Example = loadkeys es    (for Spanish standard layout)
+
+# Connecting To The Internet
+# To Ensure Network Interface Is Listed And Enabled Use:
+ip link
+# If using Ethernet Test Connection With:
+ping archlinux.org (CTRL + C to Stop)
+# If using Wi-Fi Connect With IWCTL:
+iwctl (To start the service)
+device list (To know the name of the station)
+station "name of your station" scan (To scan for networks) Example = station wlan0 scan
+station "name of your station" get-networks (To list available networks) Example = station wlan0 get-networks
+station "name of your station" connect "your WiFi name" (To connect to your Wifi) Example = station wlan0 connect Movistar_Router_1010
+# Enter password when prompted 
+exit (To exit IWCTL)
+# Test Your WiFi Connection With:
+ping archlinux.org (CTRL + C to Stop)
+
+# Partitioning The Disk
+cfdisk (To use the tool to edit partitions)
+
+
