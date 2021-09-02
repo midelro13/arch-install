@@ -95,11 +95,18 @@ useradd -m midelro # Used midelro As User Name Example
 passwd midelro "Your User Password"
 usermod -aG libvirt midelro # Used midelro As User Name Example
 
+# Enabling OS Prober To Let Grub Detect Other OS (Only For Dual OS Installations)
+nano /etc/default/grub
+# Go To The End Of The File To Inster New Line:
+GRUB_DISABLE_OS_PROBER=false
+# CTRL+O To Save + CTRL+X To Exit
+grub-mkconfig -o /boot/grub/grub.cfg #To Regen Grub Config
+
 # To Exit chroot Enviroment
 exit
 
 # To Umount /mnt
-umount -l /mnt
+umount -a
 
 # Time To Reboot
 reboot
