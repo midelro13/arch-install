@@ -24,11 +24,13 @@ ping archlinux.org (CTRL + C to Stop)
 
 # Partitioning The Disk
 cfdisk (To use the tool to edit partitions)
-# Now With Up Down Arrow Keys Select The Partition You Want To Delete And Use Left Right Arrows To Select Delete And Hit Enter, Repeat Until Done
-# Select "New" And Then Delete Text And Write "+250M" And Hit Enter, Select The New Partition And Select Type And Hit Enter Then Select "EFI System"
-# Select "New" And Then Delete Text And Write "+(you RAM size =2GB)" Example on 8GB RAM System = +10GB, Select The New Partition And Select Type And Hit Enter Then Select "Linux Swap"
-# Select "New" And Then Hit Enter To Select The Remaning Space Then Select Type And Hit Enter Then Select "Linux Filesystem"
-# Select Write And When Prompted Write "Yes" And Hit Enter Then Select Quit And Press CTRL+L To Clear The Terminal
+# Important Note: Your Disk Can have Different Names, In This Example We Are Going To Use The Name /dev/sda but yours could be anything as /dev/...
+# Important Note: Ensure You Are Using The Correct Disk If You Have Multiple Drives, The Bootable Arch USB Will Show Up While Using "lsblk" Command But Not With "cfdisk"
+# Now With Up Down Arrow Keys Select The Partition You Want To Delete And Use Left Right Arrows To Select "Delete" And Hit Enter, Repeat Until Done
+# Select "New" And Then Delete Text And Write "+250M" And Hit Enter, Select The New Partition And Select "Type" And Hit Enter Then Select "EFI System"
+# Select "New" And Then Delete Text And Write "+(you RAM size +2GB)" Example on 8GB RAM System = +10GB, Select The New Partition And Select "Type" And Then Hit Enter, Then Select "Linux Swap"
+# Select "New" And Then Hit Enter To Select The Remaning Space Then Select "Type" And Hit Enter Then Select "Linux Filesystem"
+# Select "Write" And When Prompted Write "Yes" And Hit Enter Then Select "Quit" And Press CTRL+L To Clear The Terminal
 # To Check If The Partition Table Is Correct: 
 lsblk
 
@@ -36,7 +38,7 @@ lsblk
 mount /dev/sda3 /mnt                 (To mount /mnt folder into the main partition)
 mkdir -p /mnt/boot/efi               (Making the neccesary folders to mount EFI folder into EFI partition)
 mount /dev/sda1 /mnt/boot/efi        (Mounting the new efi folder into the EFI partition)
-mkswap /dev/sda2                     (Making the swap partition as swap)
+mkswap /dev/sda2                     (Making the swap partition as swap) (You can also make a Swap File With The Benefit Of Editing The Size At Anytime)
 swapon /dev/sda2                     (Activating the swap partition)
 
 # Downloading & Installing Base Packages
