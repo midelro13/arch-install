@@ -75,7 +75,7 @@ nano /etc/hosts #Nano is a text editor and you need to write down the following 
 passwd "Your password as root"
 
 # Downloading Private Repository
-git clone https://gitlab.com/midelrocks/arch-install    (To clone the repository to our installation)
+git clone https://github.com/midelrocks/arch-install    (To clone the repository to our installation)
 cd arch-install                                         (To go to the folder downloaded)
 ls -l                                                   (To list the files in the folder)
 # To Edit Any Script Use: nano "name of the script" Example = nano install-uefi.sh
