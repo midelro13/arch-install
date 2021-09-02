@@ -51,6 +51,45 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Moving To Our Arch Installation
 arch-chroot /mnt
 
+# Setting Time Zone And Hardware Clock
+ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+hwclock --systohc
+
+# Setting Locales
+sed -i '177s/.//' /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "KEYMAP=es" >> /etc/vconsole.conf
+
+# Editing Hosts
+echo "arch" >> /etc/hostname
+nano /etc/hosts
+
+    echo "127.0.0.1 localhost"
+    echo "::1       localhost"
+    echo "127.0.1.1 arch.localdomain arch" 
+    
+# CTRL+O To Save, CTRL+X To Exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Downloading Private Repository
 git clone https://gitlab.com/midelrocks/arch-install    (To clone the repository to our installation)
 cd arch-install                                         (To go to the folder downloaded)
