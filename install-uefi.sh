@@ -36,7 +36,7 @@ systemctl enable firewalld
 systemctl enable acpid
 
 useradd -m midelro
-echo ermanno:3024 | chpasswd
+echo midelro:3024 | chpasswd
 usermod -aG libvirt midelro
 
 echo "midelro ALL=(ALL) ALL" >> /etc/sudoers.d/midelro
