@@ -14,6 +14,11 @@ git clone https://aur.archlinux.org/pikaur.git
 cd pikaur/
 makepkg -si --noconfirm
 
+# CINNAMON
+#pikaur -S --noconfirm xviewer
+#pikaur -S --noconfirm xplayer
+#pikaur -S --noconfirm pix
+
 #pikaur -S --noconfirm system76-power
 #sudo systemctl enable --now system76-power
 #sudo system76-power graphics integrated
