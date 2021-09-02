@@ -1,3 +1,4 @@
+#!/bin/bash
 # NOTE: Press CTRL + L to clear the terminal at any point.
 
 # Setting The Keyboard Layout (Default = English US)
@@ -42,7 +43,7 @@ mkswap /dev/sda2                     (Making the swap partition as swap) (You ca
 swapon /dev/sda2                     (Activating the swap partition)
 
 # Downloading & Installing Base Packages
-pacstrap /mnt base linux linux-firmware git vim intel-ucode (or amd-ucode if AMD CPU)
+pacstrap /mnt base linux linux-firmware git vim nano intel-ucode (or amd-ucode if AMD CPU)
 
 # Generating FSTAB
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -54,7 +55,7 @@ arch-chroot /mnt
 git clone https://gitlab.com/midelrocks/arch-install    (To clone the repository to our installation)
 cd arch-install                                         (To go to the folder downloaded)
 ls -l                                                   (To list the files in the folder)
-# To Edit Any Script Use: vim "name of the script" Example = vim install-uefi.sh
+# To Edit Any Script Use: nano "name of the script" Example = nano install-uefi.sh
 
 
 
