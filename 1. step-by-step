@@ -63,39 +63,46 @@ echo "KEYMAP=es" >> /etc/vconsole.conf
 
 # Editing Hosts
 echo "arch" >> /etc/hostname
-nano /etc/hosts
+nano /etc/hosts #Nano is a text editor and you need to write down the following lines in the same order
 
-    echo "127.0.0.1 localhost"
-    echo "::1       localhost"
-    echo "127.0.1.1 arch.localdomain arch" 
+    127.0.0.1 localhost
+    ::1       localhost
+    127.0.1.1 arch.localdomain arch
     
 # CTRL+O To Save, CTRL+X To Exit
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Creating Root Password
+passwd "Your password as root"
 
 # Downloading Private Repository
 git clone https://gitlab.com/midelrocks/arch-install    (To clone the repository to our installation)
 cd arch-install                                         (To go to the folder downloaded)
 ls -l                                                   (To list the files in the folder)
 # To Edit Any Script Use: nano "name of the script" Example = nano install-uefi.sh
+chmod +x downloading-packages.sh
+chmod +x systemctl-enable.sh
+./downloading-packages.sh
 
+# Installing Grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# Activating Services
+./systemctl-enable.sh
+cd # To Exit The Private Repository Folder
+
+useradd -m midelro # Used midelro As User Name Example
+passwd midelro "Your User Password"
+usermod -aG libvirt midelro # Used midelro As User Name Example
+
+# To Exit chroot Enviroment
+exit
+
+# To Umount /mnt
+umount -l /mnt
+
+# Time To Reboot
+reboot
 
 
 
