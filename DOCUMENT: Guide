@@ -51,49 +51,18 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Moving To Our Arch Installation
 arch-chroot /mnt
 
-# Setting Time Zone And Hardware Clock
-ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
-hwclock --systohc
-
-# Setting Locales
-sed -i '177s/.//' /etc/locale.gen
-locale-gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-echo "KEYMAP=es" >> /etc/vconsole.conf
-
-# Editing Hosts
-echo "arch" >> /etc/hostname
-nano /etc/hosts #Nano is a text editor and you need to write down the following lines in the same order
-
-    127.0.0.1 localhost
-    ::1       localhost
-    127.0.1.1 arch.localdomain arch
-    
-# CTRL+O To Save, CTRL+X To Exit
-
-# Creating Root Password
-passwd "Your password as root"
-
 # Downloading Private Repository
-git clone https://github.com/midelrocks/arch-install    (To clone the repository to our installation)
+git clone https://github.com/midelrocks/arch-basic      (To clone the repository to our installation)
 cd arch-install                                         (To go to the folder downloaded)
 ls -l                                                   (To list the files in the folder)
 # To Edit Any Script Use: nano "name of the script" Example = nano install-uefi.sh
-chmod +x downloading-packages.sh            # To Give The File Execution Permissions
-chmod +x systemctl-enable.sh                # To Give The File Execution Permissions
+chmod +x base-uefi.sh                       # To Give The File Execution Permissions
 cd                                          # To Exit The Private Repository Folder
-./arch-install/downloading-packages.sh      # To Execute The Bash File
-
-# Installing Grub
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB   #To Install Grub
-grub-mkconfig -o /boot/grub/grub.cfg                                              #To Generate The Config File
-
-# Activating Services
-./arch-install/systemctl-enable.sh          # To Execute The Bash File
-
-useradd -m midelro # Used midelro As User Name Example
-passwd midelro "Your User Password"
-usermod -aG libvirt midelro # Used midelro As User Name Example
+./arch-basic/base-uefi.sh      # To Execute The Bash File
+# If At Running Last Command It Says "File Not Found" Do This: 
+# exit
+# arch-chroot /mnt
+# Now Try ./arch-basic/base-uefi.sh again
 
 # Enabling OS Prober To Let Grub Detect Other OS (Only For Dual OS Installations)
 nano /etc/default/grub
@@ -121,47 +90,13 @@ nmtui
 # Test Your Connection
 sudo pacman -Syy 
 
-# Setting Hardware Clock
-sudo timedatectl set-ntp true
-sudo hwclock --systohc
-
-# Configuring Reflector
-sudo reflector -c Spain -a 2 --sort rate --save /etc/pacman.d/mirrorlist
-sudo pacman -Sy
-
-# Addinf Firewall Exceptions
-sudo firewall-cmd --add-port=1025-65535/tcp --permanent
-sudo firewall-cmd --add-port=1025-65535/udp --permanent
-sudo firewall-cmd --reload
-
-# Installing Pikaur
-git clone https://aur.archlinux.org/pikaur.git
-cd pikaur/
-makepkg -si --noconfirm
-#pikaur -S --noconfirm system76-power
-#sudo systemctl enable --now system76-power
-#sudo system76-power graphics integrated
-#pikaur -S --noconfirm gnome-shell-extension-system76-power-git
-#pikaur -S --noconfirm auto-cpufreq
-#sudo systemctl enable --now auto-cpufreq
-
 # Copy Our Private Repository From Root Folder To Home Folder So We Can Use It
-cp -r /arch-install .   # Use "ls -l" and check for 'arch-install' is listed
-cd arch-install         # To Move To The Folder Location
-ls -l                   # To List The Files Inside The Folder
+cp -r /arch-basic .                 # Use "ls -l" and check for 'arch-install' is listed
+cd arch-basic                       # To Move To The Folder Location
+ls -l                               # To List The Files Inside The Folder
 # To Edit Any Script Use: nano "name of the script" Example = nano install-uefi.sh
-chmod +x desktop-install.sh         # To Give The File Execution Permissions
-cd                                  # To Go To The Home Folder
-./arch-install/desktop-install.sh   # To Execute The Bash File
-
-# XFCE4 
-sudo systemctl enable lightdm
-# GNOME
-#sudo systemctl enable gdm
-# KDE
-#sudo systemctl enable sddm
-# CINNAMON
-#sudo systemctl enable lightdm
+chmod +x xfce.sh                    # To Give The File Execution Permissions (Just Change xfce for kde or gnome in case you want anotherone)
+./xfce.sh                           # To Execute The Bash File (Just Change xfce for kde or gnome in case you want anotherone)
 
 # Reboot Time
 reboot
